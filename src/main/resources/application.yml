@@ -1,0 +1,34 @@
+server:
+  port: 8080
+spring:
+  main:
+    web-application-type: reactive
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/maersk
+      database: maersk
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    display-request-duration: true
+    persistAuthorization: false
+    url: /openapi/openapi.yaml
+logging:
+  level:
+    com.example.maersk: DEBUG
+external:
+  availability:
+    base-url: https://maersk.com/api/bookings/checkAvailable
+    connect-timeout-ms: 1000
+    response-timeout-ms: 3000
+    read-timeout-ms: 3000
+    write-timeout-ms: 3000
