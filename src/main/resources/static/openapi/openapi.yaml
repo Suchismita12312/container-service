@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/bookings/check-availability": {
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "summary": "Check available container space via external service",
+        "operationId": "check",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvailabilityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bookings": {
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "summary": "Create a booking and persist to MongoDB",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailabilityRequest": {
+        "required": [
+          "containerSize",
+          "containerType",
+          "destination",
+          "origin",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "containerSize": {
+            "pattern": "20|40",
+            "type": "string"
+          },
+          "containerType": {
+            "type": "string",
+            "enum": [
+              "DRY",
+              "REEFER"
+            ]
+          },
+          "origin": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "quantity": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "BookingRequest": {
+        "required": [
+          "containerSize",
+          "containerType",
+          "destination",
+          "origin",
+          "quantity",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "containerSize": {
+            "pattern": "20|40",
+            "type": "string"
+          },
+          "containerType": {
+            "type": "string",
+            "enum": [
+              "DRY",
+              "REEFER"
+            ]
+          },
+          "origin": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 20,
+            "minLength": 5,
+            "type": "string"
+          },
+          "quantity": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "timestamp": {
+            "pattern": "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
