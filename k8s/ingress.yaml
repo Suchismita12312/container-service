@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: container-service-ingress
+  namespace: maersk
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: __HOST__
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: container-service
+                port:
+                  number: 80
