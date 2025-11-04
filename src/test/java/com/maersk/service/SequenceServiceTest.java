@@ -30,17 +30,16 @@ class SequenceServiceTest {
 
     @Test
     void nextBookingRef_returnsBasePlusCounter_whenDocumentExists() {
-        // given: existing sequence doc with value=5
         Sequence existing = new Sequence("bookingRef", 5L);
         when(ops.findAndModify(any(Query.class), any(Update.class), any(FindAndModifyOptions.class), eq(Sequence.class)))
                 .thenReturn(Mono.just(existing));
 
-        // when / then
+
         StepVerifier.create(service.nextBookingRef())
-                .expectNext("957000005")  // BASE (957000000) + 5
+                .expectNext("957000005")
                 .verifyComplete();
 
-        // verify query/update/options
+
         ArgumentCaptor<Query> qCap = ArgumentCaptor.forClass(Query.class);
         ArgumentCaptor<Update> uCap = ArgumentCaptor.forClass(Update.class);
         ArgumentCaptor<FindAndModifyOptions> oCap = ArgumentCaptor.forClass(FindAndModifyOptions.class);
@@ -52,7 +51,6 @@ class SequenceServiceTest {
         assertThat(queryObj.get("_id")).isEqualTo("bookingRef");
 
         Update usedUpdate = uCap.getValue();
-        // Update doesn’t expose increments directly; at least ensure we didn’t pass null
         assertThat(usedUpdate).isNotNull();
 
         FindAndModifyOptions usedOpts = oCap.getValue();
@@ -68,7 +66,6 @@ class SequenceServiceTest {
         when(ops.findAndModify(any(Query.class), any(Update.class), any(FindAndModifyOptions.class), eq(Sequence.class)))
                 .thenReturn(Mono.empty());
 
-        // when / then: defaultIfEmpty(new Sequence("bookingRef", 1)) => BASE + 1
         StepVerifier.create(service.nextBookingRef())
                 .expectNext("957000001")
                 .verifyComplete();
