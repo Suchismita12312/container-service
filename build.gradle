@@ -9,7 +9,7 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
-group = 'com.maersk'
+group = 'com.demo'
 version = '0.0.1-SNAPSHOT'
 
 repositories {

@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: container-service-hpa
-  namespace: maersk
+  namespace: container-service
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

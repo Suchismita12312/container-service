@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: container-service
-  namespace: maersk
+  namespace: demo
 spec:
   replicas: 2
   selector:

@@ -1,4 +1,4 @@
-# 🚢 Maersk Booking Service
+# Booking Service
 
 A **Spring Boot WebFlux** microservice (Java 17 + Gradle) for checking container availability and creating bookings, showcasing **Reactive Programming**, **Resilience4j Circuit Breaker/Retry**, and **MongoDB**.
 
@@ -48,7 +48,7 @@ java -jar build/libs/container-service-0.0.1-SNAPSHOT.jar
 ```bash
 docker build -t container-service:latest .
 docker run --rm -p 8080:8080 \
-  -e SPRING_DATA_MONGODB_URI="mongodb://host.docker.internal:27017/maersk" \
+  -e SPRING_DATA_MONGODB_URI="mongodb://host.docker.internal:27017/demo" \
   container-service:latest
 ```
 
@@ -94,7 +94,7 @@ springdoc:
 ## 🧹 Cleanup
 ```bash
 docker compose down -v
-docker image rm maersk-booking:latest
+docker image rm demo-booking:latest
 docker volume prune
 ```
 

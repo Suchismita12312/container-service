@@ -10,7 +10,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/maersk
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/demo
       SPRING_PROFILES_ACTIVE: docker
     # Optional health check
     healthcheck:
@@ -21,13 +21,13 @@ services:
 
   mongo:
     image: mongo:6.0
-    container_name: maersk-booking-mongo
+    container_name: booking-mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
     environment:
-      MONGO_INITDB_DATABASE: maersk
+      MONGO_INITDB_DATABASE: demo
 
 volumes:
   mongo_data:

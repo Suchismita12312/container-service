@@ -5,8 +5,8 @@ spring:
     web-application-type: reactive
   data:
     mongodb:
-      uri: mongodb://localhost:27017/maersk
-      database: maersk
+      uri: mongodb://localhost:27017/demo
+      database: demo
 management:
   endpoints:
     web:
@@ -24,10 +24,10 @@ springdoc:
     url: /openapi/openapi.yaml
 logging:
   level:
-    com.example.maersk: DEBUG
+    com.demo: DEBUG
 external:
   availability:
-    base-url: https://maersk.com/api/bookings/checkAvailable
+    base-url: https://demo.com/api/bookings/checkAvailable
     connect-timeout-ms: 1000
     response-timeout-ms: 3000
     read-timeout-ms: 3000
